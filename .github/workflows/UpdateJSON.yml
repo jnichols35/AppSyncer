@@ -15,9 +15,12 @@ jobs:
             python-version: '3.11'
             cache: 'pip' # caching pip dependencies
         - run: pip install -r requirements.txt
-        - run: python main.py
 
-        - uses: test-room-7/action-update-file@v1
+        - name: run py script
+          run: python main.py
+
+        - name: Update resources
+          uses: test-room-7/action-update-file@v1.8.0
           with:
             file-path: JSON/*.json
             commit-msg: Update resources
