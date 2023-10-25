@@ -1,0 +1,23 @@
+name: Run Py Script
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '00 10 * * 1-5'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check out repo and run py
+        uses: actions/checkout@v3
+      - run: |
+          python ./main.py
+        shell: sh
+
+      - name: update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: JSON/*.json
+          commit-msg: Update resources
+          github-token: ${{ secrets.GITHUB_TOKEN }}

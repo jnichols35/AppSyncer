@@ -1,0 +1,22 @@
+name: Update Winget
+on:
+  push:
+    paths:
+      - JSON/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: check out repo and run py create output
+        uses: actions/checkout@v3
+      - run: |
+          python ./update.py
+      - run: $GITHUB_OUTPUT
+        shell: sh
+
+      - name: Run Komac
+        uses: michidk/run-komac@v1.1.1
+        with:
+          args: '$GITHUB_OUTPUT'

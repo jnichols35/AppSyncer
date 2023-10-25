@@ -1,4 +1,3 @@
-import os
 import requests
 import json
 
@@ -23,6 +22,6 @@ if msi_link:
     }
 
     with open(file_path, "w") as json_file:
-        json.dump(data, json_file)
+        json.dump(data, json_file, indent=1)
 else:
     print("MSI link not found on the webpage.")
