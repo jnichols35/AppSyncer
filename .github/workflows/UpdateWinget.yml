@@ -19,4 +19,4 @@ jobs:
       - name: Run Komac
         uses: michidk/run-komac@v1.1.1
         with:
-          args: '$GITHUB_OUTPUT'
+          args: '$GITHUB_OUTPUT ${{ secrets.GITHUB_TOKEN }}'
