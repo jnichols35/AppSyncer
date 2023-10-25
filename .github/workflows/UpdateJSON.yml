@@ -9,22 +9,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: setup python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          cache: 'pip' # caching pip dependencies
-      - run: pip install -r requirements.txt
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.11'
+            cache: 'pip' # caching pip dependencies
+        - run: pip install -r requirements.txt
+        - run: python main.py
 
-      - name: check out repo and run py
-        uses: actions/checkout@v3
-      - run: |
-          python ./main.py
-        shell: sh
-
-      - name: update resources
-        uses: test-room-7/action-update-file@v1
-        with:
-          file-path: JSON/*.json
-          commit-msg: Update resources
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+        - uses: test-room-7/action-update-file@v1
+          with:
+            file-path: JSON/*.json
+            commit-msg: Update resources
+            github-token: ${{ secrets.GITHUB_TOKEN }}
