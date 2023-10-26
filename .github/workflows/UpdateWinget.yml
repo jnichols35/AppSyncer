@@ -8,16 +8,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    outputs:
-      output1: ${{ steps.py.outputs.cmd }}
     steps:
-      - name: check out repo and run py create output
+      - name: check out repo
         uses: actions/checkout@v3
-        id: py
-      - run: |
-          output=$(python ./update.py)
-          echo "::set-output name=output1::$output"
-        shell: sh
+      - name: read json
+        id: read-json
+        run: echo "PACKAGE_JSON=$(jq -c . < JSON/perimeter81.json)" >> $GITHUB_ENV
+          
 
   use_output:
     needs: build
@@ -25,10 +22,5 @@ jobs:
     steps:
       - name: Use the captured output
         run: |
-          echo "${{ needs.build.outputs.output1 }}"
+          echo "update --id ${{ fromJson(env.PACKAGE_JSON).id }} --version ${{ fromJson(env.PACKAGE_JSON).version }} --urls ${{ fromJson(env.PACKAGE_JSON).urls }} --submit"
           echo "Output successfully accessed"
-
-      - name: Run Komac
-        uses: michidk/run-komac@v1.1.1
-        with:
-          args: '${{ needs.build.outputs.output1 }} --token ${{ secrets.GITHUB_TOKEN }}'
