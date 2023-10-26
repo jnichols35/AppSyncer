@@ -8,16 +8,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    outputs:
+      output1: ${{ steps.step1.outputs.cmd }}
     steps:
       - name: check out repo and run py create output
         uses: actions/checkout@v3
       - run: |
           python ./update.py
-      - run: $GITHUB_OUTPUT
         shell: sh
+      - run: echo "${{ steps.step1.outputs.cmd }}"
 
       - name: Run Komac
         uses: michidk/run-komac@v1.1.1
         with:
-          args: '$GITHUB_OUTPUT ${{ secrets.GITHUB_TOKEN }}'
+          args: '${{ steps.step1.outputs.cmd }} ${{ secrets.GITHUB_TOKEN }}'
