@@ -11,16 +11,14 @@ jobs:
     steps:
       - name: check out repo
         uses: actions/checkout@v3
-      - name: read json
-        id: read-json
-        run: echo "PACKAGE_JSON=$(jq -c . < JSON/perimeter81.json)" >> $GITHUB_ENV
-          
 
-  use_output:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Use the captured output
-        run: |
-          echo "update --id ${{ fromJson(env.PACKAGE_JSON).id }} --version ${{ fromJson(env.PACKAGE_JSON).version }} --urls ${{ fromJson(env.PACKAGE_JSON).urls }} --submit"
-          echo "Output successfully accessed"
+      - name: read json
+        id: appJson
+        uses: RadovanPelka/github-action-json@v1.0.1
+        with:
+          path: "JSON/perimeter81.json"
+
+      - name: Run Komac
+        uses: michidk/run-komac@v1.1.1
+        with:
+          args: 'update --id ${{ steps.appJson.outputs.package_id }} --version ${{ steps.appJson.outputs.version_number }} --urls ${{ steps.appJson.outputs.msi_url }} --submit --token ${{ secrets.GITHUB_TOKEN }}'
