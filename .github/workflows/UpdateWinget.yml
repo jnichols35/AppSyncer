@@ -1,8 +1,9 @@
 name: Update Winget
 on:
+  workflow_dispatch:
   push:
     paths:
-      - JSON/**
+      - 'JSON/**'
 
 jobs:
   build:
