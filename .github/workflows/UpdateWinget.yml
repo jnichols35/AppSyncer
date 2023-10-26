@@ -21,4 +21,4 @@ jobs:
       - name: Run Komac
         uses: michidk/run-komac@v1.1.1
         with:
-          args: 'update --id ${{ steps.appJson.outputs.package_id }} --version ${{ steps.appJson.outputs.version_number }} --urls ${{ steps.appJson.outputs.msi_url }} --submit --token ${{ secrets.GITHUB_TOKEN }}'
+          args: 'update --id ${{ steps.appJson.outputs.package_id }} --version ${{ steps.appJson.outputs.version_number }} --urls ${{ steps.appJson.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
