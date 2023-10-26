@@ -15,7 +15,8 @@ jobs:
         uses: actions/checkout@v3
         id: py
       - run: |
-          python ./update.py
+          output=$(python ./update.py)
+          echo "::set-output name=output1::$output"
         shell: sh
       - run: echo "${{ needs.build.outputs.output1 }}"
 
