@@ -9,16 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     outputs:
-      output1: ${{ steps.step1.outputs.cmd }}
+      output1: ${{ steps.py.outputs.cmd }}
     steps:
       - name: check out repo and run py create output
         uses: actions/checkout@v3
+        id: py
       - run: |
           python ./update.py
         shell: sh
-      - run: echo "${{ steps.step1.outputs.cmd }}"
+      - run: echo "${{ needs.build.outputs.output1 }}"
 
       - name: Run Komac
         uses: michidk/run-komac@v1.1.1
         with:
-          args: '${{ steps.step1.outputs.cmd }} ${{ secrets.GITHUB_TOKEN }}'
+          args: '${{ needs.build.outputs.output1 }} --token ${{ secrets.GITHUB_TOKEN }}'
