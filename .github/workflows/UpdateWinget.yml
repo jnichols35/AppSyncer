@@ -18,7 +18,15 @@ jobs:
           output=$(python ./update.py)
           echo "::set-output name=output1::$output"
         shell: sh
-      - run: echo "${{ needs.build.outputs.output1 }}"
+
+  use_output:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use the captured output
+        run: |
+          echo "${{ needs.build.outputs.output1 }}"
+          echo "Output successfully accessed"
 
       - name: Run Komac
         uses: michidk/run-komac@v1.1.1
