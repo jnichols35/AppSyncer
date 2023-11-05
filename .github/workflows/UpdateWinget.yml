@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'JSON/**'
+      - 'JSON/**.json'
 
 jobs:
   build:
@@ -19,8 +19,7 @@ jobs:
           path: "JSON/perimeter81.json"
 
       - name: Run Komac
-        uses: michidk/run-komac@v1.1.1
+        uses: michidk/run-komac@v1.1.2
         with:
-          java-version: 18
           komac-version: 1.9.1
           args: 'update --id ${{ steps.appJson.outputs.package_id }} --version ${{ steps.appJson.outputs.version_number }} --urls ${{ steps.appJson.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
