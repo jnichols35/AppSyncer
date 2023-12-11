@@ -34,7 +34,7 @@ jobs:
         uses: michidk/run-komac@v1.1.2
         with:
           komac-version: 1.9.1
-          args: 'update --id ${{ steps.app2.outputs.package_name }} --version ${{ steps.app2.outputs.version_number }} --urls ${{ steps.app2.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
+          args: 'update --id ${{ steps.app2.outputs.product_name }} --version ${{ steps.app2.outputs.version_number }} --urls ${{ steps.app2.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.con json
         id: app3
@@ -46,7 +46,7 @@ jobs:
         uses: michidk/run-komac@v1.1.2
         with:
           komac-version: 1.9.1
-          args: 'update --id ${{ steps.app3.outputs.package_name }} --version ${{ steps.app3.outputs.version_number }} --urls ${{ steps.app3.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
+          args: 'update --id ${{ steps.app3.outputs.product_name }} --version ${{ steps.app3.outputs.version_number }} --urls ${{ steps.app3.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.sec json
         id: app4
@@ -58,4 +58,4 @@ jobs:
         uses: michidk/run-komac@v1.1.2
         with:
           komac-version: 1.9.1
-          args: 'update --id ${{ steps.app4.outputs.package_name }} --version ${{ steps.app4.outputs.version_number }} --urls ${{ steps.app4.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
+          args: 'update --id ${{ steps.app4.outputs.product_name }} --version ${{ steps.app4.outputs.version_number }} --urls ${{ steps.app4.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
