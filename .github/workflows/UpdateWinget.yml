@@ -2,8 +2,8 @@ name: Update Winget
 on:
   workflow_dispatch:
   push:
-    paths:
-      - 'JSON/**.json'
+    branches: ['main']
+    paths: ['JSON/**.json']
 
 jobs:
   build:
@@ -12,8 +12,8 @@ jobs:
       - name: check out repo
         uses: actions/checkout@v3
 
-      - name: read json
-        id: appJson
+      - name: read p81 json
+        id: app1
         uses: RadovanPelka/github-action-json@v1.0.1
         with:
           path: "JSON/perimeter81.json"
@@ -22,4 +22,40 @@ jobs:
         uses: michidk/run-komac@v1.1.2
         with:
           komac-version: 1.9.1
-          args: 'update --id ${{ steps.appJson.outputs.package_id }} --version ${{ steps.appJson.outputs.version_number }} --urls ${{ steps.appJson.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
+          args: 'update --id ${{ steps.app1.outputs.package_id }} --version ${{ steps.app1.outputs.version_number }} --urls ${{ steps.app1.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
+
+      - name: read thy.agent json
+        id: app2
+        uses: RadovanPelka/github-action-json@v1.0.1
+        with:
+          path: "JSON/DelineaInc.ThycoticAgent.json"
+      
+      - name: Run Komac
+        uses: michidk/run-komac@v1.1.2
+        with:
+          komac-version: 1.9.1
+          args: 'update --id ${{ steps.app2.outputs.package_id }} --version ${{ steps.app2.outputs.version_number }} --urls ${{ steps.app2.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
+
+      - name: read thy.agent json
+        id: app3
+        uses: RadovanPelka/github-action-json@v1.0.1
+        with:
+          path: "JSON/DelineaInc.ThycoticApplicationControlAgent.json"
+        
+      - name: Run Komac
+        uses: michidk/run-komac@v1.1.2
+        with:
+          komac-version: 1.9.1
+          args: 'update --id ${{ steps.app3.outputs.package_id }} --version ${{ steps.app3.outputs.version_number }} --urls ${{ steps.app3.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
+
+      - name: read thy.agent json
+        id: app4
+        uses: RadovanPelka/github-action-json@v1.0.1
+        with:
+          path: "JSON/DelineaInc.ThycoticLocalSecurityAgent.json"
+          
+      - name: Run Komac
+        uses: michidk/run-komac@v1.1.2
+        with:
+          komac-version: 1.9.1
+          args: 'update --id ${{ steps.app4.outputs.package_id }} --version ${{ steps.app4.outputs.version_number }} --urls ${{ steps.app4.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
