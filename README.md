@@ -61,3 +61,4 @@ This project is licensed under the MIT License.
 AppSyncer is built upon the following open-source libraries:
 - [Python](https://www.python.org/)
 - [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/)
+- [Komac](https://github.com/russellbanks/Komac)
