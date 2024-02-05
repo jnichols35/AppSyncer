@@ -7,7 +7,7 @@ AppSyncer is a Python-based tool that automates the process of syncing specific 
 - Provides a streamlined workflow for keeping applications up-to-date.
 
 ## Installation
-- Ensure you have Python installed on your system (Python Installation Guide).
+- Ensure you have Python installed on your system.
 - Clone this repository to your local machine using the following command:
 ```shell
 git clone https://github.com/jnichols35/AppSyncer.git
@@ -20,7 +20,7 @@ cd AppSyncer
 
 Install the required dependencies:
 ```shell
-    pip install -r requirements.txt
+pip install -r requirements.txt
   ```
 ## Usage
 A python script should be created to locate and generate a json file for the latest version of a software. It should be saved in the `apps` folder.
@@ -39,7 +39,7 @@ Example of what the json file should look like.
 
 Run the appsyncer.py script:
 ```shell
-    python appsyncer.py
+python appsyncer.py
 ```
 
 The script will check for updates to the specified applications based on the scripts in the `apps` and sync them with Winget.
