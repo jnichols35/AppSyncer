@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: ['main']
-    paths: ['JSON/**.json']
+    paths: ['JSON/*.json']
 
 jobs:
   build:
@@ -19,9 +19,8 @@ jobs:
           path: "JSON/perimeter81.json"
 
       - name: Run Komac - p81
-        uses: michidk/run-komac@v1.1.2
+        uses: michidk/run-komac@v2
         with:
-          komac-version: 1.9.1
           args: 'update --id ${{ steps.app1.outputs.package_id }} --version ${{ steps.app1.outputs.version_number }} --urls ${{ steps.app1.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.agent json
@@ -31,9 +30,8 @@ jobs:
           path: "JSON/DelineaInc.ThycoticAgent.json"
       
       - name: Run Komac - thy.agent
-        uses: michidk/run-komac@v1.1.2
+        uses: michidk/run-komac@v2
         with:
-          komac-version: 1.9.1
           args: 'update --id ${{ steps.app2.outputs.product_name }} --version ${{ steps.app2.outputs.version_number }} --urls ${{ steps.app2.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.con json
@@ -43,9 +41,8 @@ jobs:
           path: "JSON/DelineaInc.ThycoticApplicationControlAgent.json"
         
       - name: Run Komac - thy.con
-        uses: michidk/run-komac@v1.1.2
+        uses: michidk/run-komac@v2
         with:
-          komac-version: 1.9.1
           args: 'update --id ${{ steps.app3.outputs.product_name }} --version ${{ steps.app3.outputs.version_number }} --urls ${{ steps.app3.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.sec json
@@ -55,7 +52,6 @@ jobs:
           path: "JSON/DelineaInc.ThycoticLocalSecurityAgent.json"
           
       - name: Run Komac - thy.sec
-        uses: michidk/run-komac@v1.1.2
+        uses: michidk/run-komac@v2
         with:
-          komac-version: 1.9.1
           args: 'update --id ${{ steps.app4.outputs.product_name }} --version ${{ steps.app4.outputs.version_number }} --urls ${{ steps.app4.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
