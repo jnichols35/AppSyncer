@@ -19,9 +19,8 @@ jobs:
           path: "JSON/perimeter81.json"
 
       - name: Run Komac - p81
-        uses: michidk/run-komac@v2
+        uses: michidk/run-komac@v2.0.1
         with:
-          komac-version: 2.0.4
           args: 'update -i ${{ steps.app1.outputs.package_id }} -v ${{ steps.app1.outputs.version_number }} --urls ${{ steps.app1.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.agent json
@@ -31,9 +30,8 @@ jobs:
           path: "JSON/DelineaInc.ThycoticAgent.json"
       
       - name: Run Komac - thy.agent
-        uses: michidk/run-komac@v2
+        uses: michidk/run-komac@v2.0.1
         with:
-          komac-version: 2.0.4
           args: 'update -i ${{ steps.app2.outputs.product_name }} -v ${{ steps.app2.outputs.version_number }} --urls ${{ steps.app2.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.con json
@@ -43,9 +41,8 @@ jobs:
           path: "JSON/DelineaInc.ThycoticApplicationControlAgent.json"
         
       - name: Run Komac - thy.con
-        uses: michidk/run-komac@v2
+        uses: michidk/run-komac@v2.0.1
         with:
-          komac-version: 2.0.4
           args: 'update -i ${{ steps.app3.outputs.product_name }} -v ${{ steps.app3.outputs.version_number }} --urls ${{ steps.app3.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.sec json
@@ -55,7 +52,6 @@ jobs:
           path: "JSON/DelineaInc.ThycoticLocalSecurityAgent.json"
           
       - name: Run Komac - thy.sec
-        uses: michidk/run-komac@v2
+        uses: michidk/run-komac@v2.0.1
         with:
-          komac-version: 2.0.4
           args: 'update -i ${{ steps.app4.outputs.product_name }} -v ${{ steps.app4.outputs.version_number }} --urls ${{ steps.app4.outputs.uri }} --submit --token ${{ secrets.GH_TOKEN }}'
