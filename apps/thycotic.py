@@ -3,16 +3,6 @@ import json
 from bs4 import BeautifulSoup
 
 
-class NoQuoteEncoder(json.JSONEncoder):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-    def default(self, obj):
-        if obj == "URI":
-            return obj
-        return super().default(obj)
-
-
 url = "https://docs.delinea.com/online-help/privilege-manager/install/sw-downloads.htm#AgentSoftware"
 
 response = requests.get(url)
@@ -47,12 +37,11 @@ for version, uri_parent in zip(version_elements, uri_elements):
             }
             data_list.append(data)
 
-
 for data in data_list:
     modified_product_name = data["product_name"]
     filename = f"JSON/{modified_product_name}.json"
 
     with open(filename, "w") as json_file:
-        json.dump(data, json_file, indent=1, cls=NoQuoteEncoder)
+        json.dump(data, json_file, indent=1)
 
     print(f"JSON file '{filename}' has been created successfully.")
