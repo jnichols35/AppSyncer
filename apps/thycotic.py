@@ -33,7 +33,7 @@ for version, uri_parent in zip(version_elements, uri_elements):
             data = {
                 "product_name": modified_product_name,
                 "version_number": version_number,
-                "URI": f"{uri},{modified_uri}"
+                "URI": f"{uri} {modified_uri}"
             }
             data_list.append(data)
 
