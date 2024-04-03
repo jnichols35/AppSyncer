@@ -29,14 +29,16 @@ jobs:
         with:
           path: "JSON/DelineaInc.ThycoticAgent.json"
 
-      - name: jq uri thy.agent
-        id: output2
-        run: (jq -r '.URI' JSON/DelineaInc.ThycoticAgent.json)
+      - name: Run jq and capture output
+        id: jq_output
+        run: |
+          output=$(jq -r '.URI' JSON/DelineaInc.ThycoticAgent.json)
+          echo "::set-output name=output::$output"
       
       - name: Run Komac - thy.agent
         uses: michidk/run-komac@v2.0.1
         with:
-          args: 'update -i ${{ steps.app2.outputs.product_name }} -v ${{ steps.app2.outputs.version_number }} --urls ${{ steps.output2.outputs }} --submit --token ${{ secrets.GH_TOKEN }}'
+          args: 'update -i ${{ steps.app2.outputs.product_name }} -v ${{ steps.app2.outputs.version_number }} --urls ${{ steps.jq_output.outputs.output }} --submit --token ${{ secrets.GH_TOKEN }}'
 
       - name: read thy.con json
         id: app3
