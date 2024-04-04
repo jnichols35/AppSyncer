@@ -66,7 +66,7 @@ jobs:
       - name: Run jq and capture output 3
         id: jq_output3
         run: |
-          output=$(jq -r '.URI' JSON/DelineaInc.ThycoticSecurityAgent.json)
+          output=$(jq -r '.URI' JSON/DelineaInc.ThycoticLocalSecurityAgent.json)
           echo "::set-output name=output::$output"
 
       - name: Run Komac - thy.sec
