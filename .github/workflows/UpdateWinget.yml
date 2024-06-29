@@ -19,57 +19,6 @@ jobs:
           path: "JSON/perimeter81.json"
 
       - name: Run Komac - p81
-        uses: michidk/run-komac@v2.0.1
+        uses: michidk/run-komac@v2.1.0
         with:
           args: 'update -i ${{ steps.app1.outputs.package_id }} -v ${{ steps.app1.outputs.version_number }} --urls ${{ steps.app1.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
-
-      - name: read thy.agent json
-        id: app2
-        uses: RadovanPelka/github-action-json@v1.0.1
-        with:
-          path: "JSON/DelineaInc.ThycoticAgent.json"
-
-      - name: Run jq and capture output 1
-        id: jq_output1
-        run: |
-          output=$(jq -r '.URI' JSON/DelineaInc.ThycoticAgent.json)
-          echo "::set-output name=output::$output"
-      
-      - name: Run Komac - thy.agent
-        uses: michidk/run-komac@v2.0.1
-        with:
-          args: 'update -i ${{ steps.app2.outputs.product_name }} -v ${{ steps.app2.outputs.version_number }} --urls ${{ steps.jq_output1.outputs.output }} --submit --token ${{ secrets.GH_TOKEN }}'
-
-      - name: read thy.con json
-        id: app3
-        uses: RadovanPelka/github-action-json@v1.0.1
-        with:
-          path: "JSON/DelineaInc.ThycoticApplicationControlAgent.json"
-
-      - name: Run jq and capture output 2
-        id: jq_output2
-        run: |
-          output=$(jq -r '.URI' JSON/DelineaInc.ThycoticApplicationControlAgent.json)
-          echo "::set-output name=output::$output"
-
-      - name: Run Komac - thy.con
-        uses: michidk/run-komac@v2.0.1
-        with:
-          args: 'update -i ${{ steps.app3.outputs.product_name }} -v ${{ steps.app3.outputs.version_number }} --urls ${{ steps.jq_output2.outputs.output }} --submit --token ${{ secrets.GH_TOKEN }}'
-
-      - name: read thy.sec json
-        id: app4
-        uses: RadovanPelka/github-action-json@v1.0.1
-        with:
-          path: "JSON/DelineaInc.ThycoticLocalSecurityAgent.json"
-
-      - name: Run jq and capture output 3
-        id: jq_output3
-        run: |
-          output=$(jq -r '.URI' JSON/DelineaInc.ThycoticLocalSecurityAgent.json)
-          echo "::set-output name=output::$output"
-
-      - name: Run Komac - thy.sec
-        uses: michidk/run-komac@v2.0.1
-        with:
-          args: 'update -i ${{ steps.app4.outputs.product_name }} -v ${{ steps.app4.outputs.version_number }} --urls ${{ steps.jq_output3.outputs.output }} --submit --token ${{ secrets.GH_TOKEN }}'
