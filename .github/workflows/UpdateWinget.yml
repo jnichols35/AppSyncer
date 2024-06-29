@@ -21,4 +21,4 @@ jobs:
       - name: Run Komac - p81
         uses: michidk/run-komac@v2.1.0
         with:
-          args: 'update -i ${{ steps.app1.outputs.package_id }} -v ${{ steps.app1.outputs.version_number }} --urls ${{ steps.app1.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
+          args: 'update ${{ steps.app1.outputs.package_id }} -v ${{ steps.app1.outputs.version_number }} --urls ${{ steps.app1.outputs.msi_url }} --submit --token ${{ secrets.GH_TOKEN }}'
