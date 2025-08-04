@@ -4,10 +4,16 @@ on:
   push:
     branches: ['main']
     paths: ['JSON/*.json']
+  workflow_run:
+    workflows: ["Run Py Script"]
+    types:
+      - completed
+    branches: ['main']
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: ${{ (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.outputs.changes_made == 'true') || github.event_name != 'workflow_run' }}
     steps:
       - name: check out repo
         uses: actions/checkout@v3

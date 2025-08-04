@@ -20,8 +20,12 @@ jobs:
           run: python main.py
 
         - name: Update resources
+          id: update-resources
           uses: test-room-7/action-update-file@v1.8.0
           with:
             file-path: JSON/*.json
             commit-msg: Update resources
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+            github-token: ${{ secrets.GH_TOKEN }}
+        - name: Set changed flag
+          if: steps.update-resources.outputs.changedFiles != '0'
+          run: echo "changes_made=true" >> $GITHUB_OUTPUT
